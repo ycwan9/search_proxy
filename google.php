@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title></title>
+<title>goo <?php if (array_key_exists("q",$_GET)){ echo $_GET["q"];} ?></title>
 <meta name="generator" content="Bluefish 2.2.5" >
 <meta name="author" content="ycwan9" >
 <meta name="date" content="2015-10-11T18:03:25+0800" >
@@ -13,11 +13,31 @@
 <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8">
 <meta http-equiv="content-style-type" content="text/css">
 <meta http-equiv="expires" content="0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<style>
+#goo_form{
+font-size: 2em;
+}
+#goo_text{
+width: 60%;
+}
+#goo_search{
+width: 20%;
+}
+@media (max-device-width: 400px){
+#goo_text{
+width: 100%;
+}
+#goo_search{
+width: 100%;
+}
+}
+</style>
 </head>
 <body>
-<form method="get">
-<input type="text" name="q" text="<?php if (array_key_exists("q",$_GET)){ echo $_GET["q"];} ?>" />
-<input type="submit" name="search" text="search" />
+<form method="get" id="goo_form">
+<input type="text" name="q" id="goo_text" value="<?php if (array_key_exists("q",$_GET)){ echo $_GET["q"];} ?>" />
+<input type="submit" name="search" id="goo_search" value="search" />
 </form>
 <hr />
 <?php
@@ -46,7 +66,7 @@ if (array_key_exists("q",$_GET)){
 	//var_dump($json);
 	//print result
 	foreach ($json["responseData"]["results"] as $i){
-		echo "<a href=\"",$i["unescapedUrl"],"\" ><h1>",$i["title"],"</h1></a>\n";
+		echo "<a href=\"",$i["unescapedUrl"],"\" ><h2>",$i["title"],"</h2></a>\n";
 		echo "<i>",$i["visibleUrl"],"</i>&nbsp;&nbsp;<a href=\"",$i["cacheUrl"],"\" >Cache</a>\n";
 		echo "<p>",$i["content"],"</p><hr />\n";
 	}
