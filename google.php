@@ -16,29 +16,54 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <style>
 #goo_form{
-font-size: 2em;
+padding: 1% 10%;
+background: #c0c0c0;
 }
 #goo_text{
 width: 60%;
+font-size: 1em;
+padding: 0 1%;
 }
 #goo_search{
 width: 20%;
+font-size: 1em;
+}
+#goo_re{
+margin: 0 5%;
 }
 @media (max-device-width: 400px){
+#goo_form{
+padding: 1% 5%;
+}
 #goo_text{
-width: 100%;
+width: 80%;
 }
 #goo_search{
-width: 100%;
+width: 15%;
+}
+#goo_re{
+margin: 0;
 }
 }
 </style>
+<noscript>
+
+<!--
+
 </head>
+
+-->
+</head>
+</noscript>
+<!--
+<body>
+-->
 <body>
 <form method="get" id="goo_form">
 <input type="text" name="q" id="goo_text" value="<?php if (array_key_exists("q",$_GET)){ echo $_GET["q"];} ?>" />
-<input type="submit" name="search" id="goo_search" value="search" />
+<input type="submit" name="search" id="goo_search" value="go" />
 </form>
+<div id="goo_re">
 <hr />
 <?php
 if (array_key_exists("q",$_GET)){
@@ -70,7 +95,7 @@ if (array_key_exists("q",$_GET)){
 		echo "<i>",$i["visibleUrl"],"</i>&nbsp;&nbsp;<a href=\"",$i["cacheUrl"],"\" >Cache</a>\n";
 		echo "<p>",$i["content"],"</p><hr />\n";
 	}
-	echo "<p><i>",$json["responseData"]["cursor"]["resultCount"]," in ",$json["responseData"]["cursor"]["searchResultTime"]," sec.</i></p>\n";
+	echo "</div><p id=\"goo_count\" ><i>",$json["responseData"]["cursor"]["resultCount"]," in ",$json["responseData"]["cursor"]["searchResultTime"]," sec.</i></p>\n";
 	//prev & next 
 	if (array_key_exists("start",$_GET)){
 		$no_start = str_replace("&start=".$_GET["start"], "", $_SERVER["REQUEST_URI"]);
@@ -83,9 +108,6 @@ if (array_key_exists("q",$_GET)){
 		echo "\n<a href=\"",$_SERVER["REQUEST_URI"],"&start=8","\" >&gt;next</a>\n";
 	}
 	echo "<p>responseDetails: ",$json["responseDetails"],"<br />responseStatus: ",strval($json["responseStatus"]),"</p>\n";
-}
-else{
-	echo "hello";
 }
 ?>
 
